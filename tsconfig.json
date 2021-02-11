@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "strict": true,
+    "strictNullChecks": true,
+    "module": "CommonJS",
+    "moduleResolution": "node"
+  }
+}
