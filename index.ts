@@ -24,8 +24,10 @@ function test(srcFile:string) {
 function run(src:string) {
     const t=MyTokenizer(src);
     const tokens=t.tokenize();
+    tokens.forEach((token,i)=>console.log(`${i}:[${token.type}] ${token.text}`));
     const p=MyParser(tokens);
     const tree=p.parse();
+    console.log(tree);
     const js=`
     const {Num}=runtime;
     return ${generate(tree)};
