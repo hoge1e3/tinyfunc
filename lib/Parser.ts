@@ -11,9 +11,18 @@ export default class Parser {
 	eot() {
 		return this.index>=this.source.length;
 	}
-	readToken(tokenType:string):Token {
+	nextTokenIs(tokenType:string):boolean {
+		if (this.eot()) return false;
+		const curToken=this.source[this.index];
+		return curToken.type===tokenType;
+	}
+	peekToken():Token {
 		if (this.eot()) throw this.parseError("End of tokens");
 		const curToken=this.source[this.index];
+		return curToken;
+	}
+	readToken(tokenType:string):Token {
+		const curToken=this.peekToken();
 		const readType=curToken.type;
 		if (readType===tokenType) {
 			return this.source[this.index++];
