@@ -7,7 +7,7 @@ export default function MyParser(tokens:Token[]){
 	function parse() {
 		try {
 			const res=parseExpression();
-			if (!parser.eot()) throw new Error("NOT EOF");
+			if (!parser.eot()) throw parser.parseError("Not EOF");
 			return res;
 		} catch (e) {
 			if (parser.maxParseError) throw parser.maxParseError;
