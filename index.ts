@@ -27,7 +27,7 @@ function run(src:string) {
     tokens.forEach((token,i)=>console.log(`${i}:[${token.type}] ${token.text}`));
     const p=MyParser(tokens);
     const tree=p.parse();
-    console.log(tree);
+    console.dir(tree, {depth:10});
     const js=`
     const {Num}=runtime;
     return ${generate(tree)};
