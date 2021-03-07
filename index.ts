@@ -4,6 +4,7 @@ import MyParser from "./lang/MyParser";
 import { generate } from "./lang/CodeGen";
 import * as runtime from "./lang/runtime";
 import { ParseError } from "./lib/TreeTypes";
+import { check } from "./lang/Semantics";
 for (let i=2;i<process.argv.length;i++) {
     test(process.argv[i]);
 }
@@ -28,6 +29,7 @@ function run(src:string) {
     const p=MyParser(tokens);
     const tree=p.parse();
     console.dir(tree, {depth:10});
+    check(tree);
     const js=`
     const {Num}=runtime;
     return ${generate(tree)};
