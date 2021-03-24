@@ -31,7 +31,7 @@ function run(src:string) {
     console.dir(tree, {depth:10});
     check(tree);
     const js=`
-    const {Num}=runtime;
+    const {Num, Str}=runtime;
     return ${generate(tree)};
     `;
     console.log(js);

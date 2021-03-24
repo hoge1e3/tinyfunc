@@ -10,6 +10,7 @@ export default function MyTokenizer(src:string) {
             if (tokenizer.eof()) return tokens;
             const token=
                 tokenizer.read("number",/^[0-9]+/) ||
+                tokenizer.read("string",/^"[^"]*"+/) ||
                 tokenizer.read("lpar",/^\(/) ||
                 tokenizer.read("rpar",/^\)/) ||
                 tokenizer.read("dot",/^\./) ||

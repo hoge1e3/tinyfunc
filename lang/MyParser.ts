@@ -1,5 +1,5 @@
 import Parser from '../lib/Parser';
-import { ValueExpression, NumberLiteral, Identifier, Call, MemberAccess } from './Expressions';
+import { ValueExpression, NumberLiteral, Identifier, Call, MemberAccess, StringLiteral } from './Expressions';
 import { Token } from '../lib/TreeTypes';
 
 export default function MyParser(tokens:Token[]){
@@ -19,6 +19,7 @@ export default function MyParser(tokens:Token[]){
 	}
 	function parseElement():ValueExpression {
         if (parser.nextTokenIs("number")) return parseNumberLiteral();
+		if (parser.nextTokenIs("string")) return parseStringLiteral();
         if (parser.nextTokenIs("identifier")) return parseIdentifier();
 		throw parser.parseError();
 	}
@@ -41,6 +42,10 @@ export default function MyParser(tokens:Token[]){
 	function parseNumberLiteral():NumberLiteral {
 		const t=parser.readToken("number");
 		return new NumberLiteral(parseFloat(t.text));
+	}
+	function parseStringLiteral():StringLiteral {
+		const t=parser.readToken("string");
+		return new StringLiteral(t.text.replace(/^"/,"").replace(/"$/,""));
 	}
 	function parseIdentifier():Identifier {
 		const t=parser.readToken("identifier");

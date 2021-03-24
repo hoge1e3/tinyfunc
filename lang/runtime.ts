@@ -8,3 +8,14 @@ export const Num=(value:number):INum=>({
         return Num(value+b.value);
     },
 });
+
+interface IStr {
+    value:string;
+    add:(b:IStr)=>IStr,
+};
+export const Str=(value:string):IStr=>({
+    value,
+    add(b:IStr) {
+        return Str(value+b.value);
+    },
+});

@@ -1,10 +1,12 @@
-import { ValueExpression, NumberLiteral, Identifier, MemberAccess, Call} from "./Expressions";
+import { ValueExpression, NumberLiteral, Identifier, MemberAccess, Call, StringLiteral} from "./Expressions";
 
 function invalid(s:never){return new Error("${s} is invalid");}
 export function generate(expr:ValueExpression):string {
     const g=generate;
     if (expr instanceof NumberLiteral) {
         return `Num(${expr.value})`;
+    } else if (expr instanceof StringLiteral) {
+        return `Str("${expr.value}")`;
     } else if (expr instanceof Identifier) {
         return expr.text;
     } else if (expr instanceof MemberAccess) {
